@@ -1,0 +1,12 @@
+.button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border-width: 1px;
+  color: whitesmoke;
+  background-color: $blue-light;
+  transition: background-color 0.15s ease-in-out;
+
+  &:hover {
+    background-color: $blue-strong;
+  }
+}

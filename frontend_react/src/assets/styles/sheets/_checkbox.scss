@@ -1,0 +1,6 @@
+input[type="checkbox"] {
+  &:checked {
+    background-color: rgb(255, 193, 7);
+    border-color: rgb(255, 193, 7);
+  }
+}
