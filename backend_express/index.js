@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 // app.use(cors({origin: allowedOrigins}))
 app.use(cors())
-app.use()
+app.use(express.static('build'))
 
 let notes = [
     { id: '1', content: 'note from express', important: true }
