@@ -6,6 +6,7 @@ app.get(EXPRESS_URL, (req, resp) => {
     Note
         .find({})
         .then(notes => {
+            console.log(notes)
             // status OK
             resp.status(200).json(notes)
         })
@@ -15,7 +16,7 @@ app.get(EXPRESS_URL, (req, resp) => {
 app.post(EXPRESS_URL, (req, resp) => {
     let { body: { note } } = req
     const newNote = new Note({
-        note
+        ...note
     })
     newNote
         .save()
