@@ -5,6 +5,9 @@
 - fontend: react
   + bootstrap, FA-icons, saas, clsx
 
+----
+Note : only backend_express directory (React build + Express server) is deployed to the render.com cloud service
+
 https://mono-express-react-notes.onrender.com/
 
 ----
