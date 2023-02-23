@@ -1,53 +1,44 @@
-const express = require('express')
-const cors = require('cors')
-const { v4: uuidv4 } = require('uuid')
-// const allowedOrigins = ['http://localhost:3000']
-
-const app = express()
-app.use(express.json())
-// app.use(cors({origin: allowedOrigins}))
-app.use(cors())
-app.use(express.static('build'))
-
-let notes = [
-    { id: '1', content: 'note from express', important: true }
-]
-
-const BASE_URL = '/api/notes'
+const { app, EXPRESS_URL } = require('./express')
+const { Note, mongoDisconnect } = require('./mongo_db/models')
 
 // index
-app.get(BASE_URL, (req, res) => {
-    res.status(200).json(notes)
+app.get(EXPRESS_URL, (req, resp) => {
+    Note
+        .find({})
+        .then(notes => {
+            console.log(notes)
+            // status OK
+            resp.status(200).json(notes)
+        })
 })
 
-// // show
-// app.get(`${BASE_URL}/:id`, (req, res) => {
-//     const { params: { id } } = req
-//     const note = notes.find(n => n.id === id)
-//     if (note) {
-//         res.status(200).json(note)
-//     } else {
-//         res.sendStatus(404)
-//     }
-// })
-
 // create
-app.post(`${BASE_URL}`, (req, res) => {
-    let { body: { note: newNote } } = req
-    newNote = {...newNote, id: uuidv4() }
-    notes = [...notes, newNote]
-    // status created
-    res.status(201).json(newNote)
+app.post(EXPRESS_URL, (req, resp) => {
+    let { body: { note } } = req
+    const newNote = new Note({
+        ...note
+    })
+    newNote
+        .save()
+        .then(savedNote => {
+            // status created
+            resp.status(201).json(savedNote)
+        })
 })
 
 // update
-app.patch(`${BASE_URL}/:id`, (req, res) => {
+app.patch(`${EXPRESS_URL}/:id`, (req, res) => {
     const { params: { id }, body } = req
-    const note = notes.find(n => n.id === id)
-    if (note) {
-        const updatedNote = {...note, ...body}
-        notes = notes.map(n => n.id !== id ? n : updatedNote)
-        res.status(200).json(updatedNote)
+    const note = Note.findById(id)
+    if(note){
+        Note.findOneAndUpdate(
+            { _id: id },
+            { important: body.important },
+            (err, updatedNote) => {
+                if (err) throw err;
+                res.status(200).json(updatedNote)
+            }
+        )
     } else {
         // status resource not found
         res.sendStatus(404)
@@ -55,25 +46,23 @@ app.patch(`${BASE_URL}/:id`, (req, res) => {
 })
 
 // delete
-app.delete(`${BASE_URL}/:id`, (req, res) => {
+app.delete(`${EXPRESS_URL}/:id`, (req, res) => {
     const { params: { id } } = req
-    const note = notes.find(n => n.id === id)
+    const note = Note.findById(id)
     if (note) {
-        notes = notes.filter(n => n.id !== id)
-        // status success w/ no data to return
-        res.sendStatus(204);
+        Note.findOneAndDelete(
+            { _id: id },
+            (err, deletedNote) => {
+                if (err) throw err;
+                // status success w/ no data to return
+                res.sendStatus(204);
+            }
+        );
     } else {
         // status resource not found
         res.sendStatus(404);
     }
 })
-
-// error
-// app.get(`${BASE_URL}/404`, (req, res) => {
-//     res.send(`
-//         <h1>oups...page not found</h1>
-//     `)
-// })
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
