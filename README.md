@@ -1,4 +1,6 @@
-# Test render.com webservices 
+# MERN notes app deployed on render web services
+
+- mongo db (notes collection)
 - backend: express
   + middlewares: cors, static 
   + uuid 
@@ -6,13 +8,17 @@
   + bootstrap, FA-icons, saas, clsx
 
 ----
-Note : only the `backend_express` directory (`React build` + `Express server`) is deployed to the `render.com` cloud service
+# render.com
+
+Note : only the `backend_express` directory (`React build` + `Express server` + `mongo db logic`) is deployed to the `render.com` cloud service
 
 https://mono-express-react-notes.onrender.com/
 
 ----
-# Local
-- backend_express -> npm install
+# local
+- backend_express
+  + .env w/mongodb credentials
+  + npm install
 - localhost:3001
 ----
 
