@@ -1,5 +1,6 @@
-# MERN notes app deployed on render web services
+# MERN notes app 
 
+- deployed on render web services
 - mongo db (notes collection)
 - backend: express
   + middlewares: cors, static 
