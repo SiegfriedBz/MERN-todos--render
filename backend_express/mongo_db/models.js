@@ -13,6 +13,14 @@ mongoose.connect(MONGO_URL)
         console.log('error connecting to MongoDB:', error.message)
     })
 
+// * USERS
+// mongo db users collection
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String
+})
+
+// * NOTES
 // mongo db notes collection
 const noteSchema = new mongoose.Schema({
     content: String,
@@ -26,11 +34,13 @@ noteSchema.set('toJSON', {
     }
 })
 
+// * Disconnect
 const mongoDisconnect = () => {
     mongoose.connection.close()
 }
 
 module.exports = {
+    User: mongoose.model('User', userSchema),
     Note: mongoose.model('Note', noteSchema),
     mongoDisconnect
 }
