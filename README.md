@@ -1,11 +1,15 @@
 # MERN notes app 
 
+root folder : run `npm run build` => create React build and move it to backend folder
+
 - deployed on render web services
-- mongo db (notes collection)
-- backend: express
+- mongo db 
+
+2 sub-folders:
+- backend: Express
   + middlewares: cors, static 
   + uuid 
-- fontend: react
+- fontend: React
   + bootstrap, FA-icons, saas, clsx
 
 ----
