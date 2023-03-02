@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd ./../frontend_react && npm run build && rm -rf ../backend/build && mv build ../backend && cd ../backend && npm install"
   },
   "author": "",
   "license": "ISC",

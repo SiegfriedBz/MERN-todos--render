@@ -1,0 +1,18 @@
+{
+  "name": "MERN_App_Notes",
+  "version": "1.0.0",
+  "description": "MERN_App_Notes deployed on render web services",
+  "scripts": {
+    "build": "cd frontend_react && npm run build && rm -rf ../backend_express/build && mv build ../backend_express/build && cd ../backend_express && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiegfriedBz/mono-express_react-notes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SiegfriedBz/mono-express_react-notes/issues"
+  },
+  "homepage": "https://github.com/SiegfriedBz/mono-express_react-notes#readme"
+}
