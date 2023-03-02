@@ -1,44 +1,60 @@
 import { useState, useEffect } from 'react'
-import  { getNotes, addNote, updateNote, deleteNote } from './services/noteService'
+import useNotesService from './services/useNotesService'
+import login from './services/loginService'
+import Notification from './components/shared/Notification'
 import Navbar from './components/shared/Navbar'
 import Footer from './components/shared/Footer'
 import Notes from './components/Notes'
-import AddNote from "./components/AddNote";
+import AddNote from "./components/AddNote"
+import Login from './components/Login'
 
 function App() {
-    const [notes, setNotes] = useState([])
+    const [ notes, getNotes, addNote, updateNote, deleteNote, errorMessage] = useNotesService()
+
     const [showAllNotes, setShowAllNotes] = useState(true)
+    const [user, setUser] = useState({
+        username: '',
+        password: ''
+    })
 
     useEffect(() => {
         (async () => {
-            const notes = await getNotes()
-            setNotes(notes)
+            await getNotes()
         })()
     }, [])
 
-    const notesToShow = showAllNotes ? notes : notes.filter(n => n.important)
-
     const handleAdd = async(note) => {
-        const newNote = await addNote(note)
-        setNotes([...notes, newNote])
+        await addNote(note)
     }
 
     const handleUpdate = async (id) => {
         const note = notes.find(n => n.id === id)
         const changedNote = {...note, important: !note.important}
-        const updatedNote = await updateNote(id, changedNote)
-        setNotes(notes.map(n => n.id !== id ? n : updatedNote))
+        await updateNote(id, changedNote)
     }
 
     const handleDelete = async (id) => {
         await deleteNote(id)
-        setNotes(notes.filter(n => n.id !== id))
     }
+
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        await login(user)
+        console.log('logging in with', user.username, user.password)
+    }
+
+    const notesToShow = showAllNotes ? notes : notes.filter(n => n.important)
 
     return (
         <>
             <Navbar />
             <div className="container">
+                <Notification message={errorMessage}/>
+                <Login
+                    handleLogin={handleLogin}
+                    user={user}
+                    setUser={setUser}
+                />
                 <Notes
                     notesToShow={notesToShow}
                     showAllNotes={showAllNotes}
