@@ -64,7 +64,7 @@ export default function useNotesService() {
         }
     }
 
-    const toggleImportant = async (id, changedNote) => {
+    const updateNote = async (id, changedNote) => {
         try {
             const response = await fetch(`${EXPRESS_URL_NOTES}/${id}`, fetchOptions("PATCH", changedNote))
             if (response.status === 200) {
@@ -93,13 +93,6 @@ export default function useNotesService() {
             }
             console.error(`updateNote thrown an error: ${error}`)
         }
-    }
-
-    const updateNote = async (id, changedNote) => {
-    //     try{
-    //     } catch(error) {
-    //         console.error(error)
-    //     }
     }
 
     const deleteNote = async (id) => {
@@ -136,7 +129,6 @@ export default function useNotesService() {
         getNotes,
         getNote,
         addNote,
-        toggleImportant,
         updateNote,
         deleteNote,
         errorMessage

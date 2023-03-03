@@ -63,6 +63,7 @@ notesController.patch(`${EXPRESS_URL_NOTES}/:id`, async (req, resp) => {
         if(note) {
             const updatedNote = await Note.findOneAndUpdate(
                 {_id: id},
+                {content: body.content},
                 {important: body.important},
                 {new: true} // to get the updated note returned
             )
