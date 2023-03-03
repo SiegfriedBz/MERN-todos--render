@@ -3,10 +3,9 @@
 root folder : run `npm run build` => create React build and move it to backend folder
 
 - deployed on render web services
-- mongo db 
 
 2 sub-folders:
-- server: Express
+- server: Express +  MongoDB 
   + middlewares: cors, static 
   + uuid 
 - client: React
