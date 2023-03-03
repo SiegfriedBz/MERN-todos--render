@@ -35,7 +35,7 @@ function App() {
         await addNote(note)
     }
 
-    const handleUpdate = (id, changedNote) => {
+    const handleUpdate = async (id, changedNote) => {
         await updateNote(id, changedNote)
     }
 
