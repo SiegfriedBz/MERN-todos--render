@@ -1,4 +1,4 @@
-/backend_express/node_modules
-/frontend_react/node_modules
-
-/backend_express/.env
+/*/node_modules
+/*/package-lock.json
+/*/.idea
+/*/.env
