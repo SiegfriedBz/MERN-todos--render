@@ -6,10 +6,10 @@ root folder : run `npm run build` => create React build and move it to backend f
 - mongo db 
 
 2 sub-folders:
-- backend: Express
+- server: Express
   + middlewares: cors, static 
   + uuid 
-- fontend: React
+- client: React
   + bootstrap, FA-icons, saas, clsx
 
 ----
@@ -21,9 +21,10 @@ https://mern-notes-vitc.onrender.com/
 
 ----
 # local
-- backend_express
+- server
   + .env w/mongodb credentials
   + npm install
+  + npm run dev
 - localhost:3001
 ----
 
