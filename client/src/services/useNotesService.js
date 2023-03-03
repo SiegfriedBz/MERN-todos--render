@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { EXPRESS_URL_NOTES } from './expressUrl'
 
 export default function useNotesService() {
-    const [notes, setNotes] = useState([])
+    const [notes, setNotes] = useState([{id: 1, content: 'first note', important: true}])
     const [errorMessage, setErrorMessage] = useState(undefined)
 
     const fetchOptions = (method, data = {}) => {
@@ -21,7 +21,7 @@ export default function useNotesService() {
     const getNotes = async () => {
         try {
             const response = await fetch(EXPRESS_URL_NOTES)
-            if (response.status === 200 ) {
+            if (response.status === 200) {
                 const notes = await response.json()
                 setNotes(notes)
             } else {
@@ -29,6 +29,20 @@ export default function useNotesService() {
             }
         } catch (error) {
             console.error(`getNotes thrown an error: ${error}`)
+        }
+    }
+
+    const getNote = async (id) => {
+        try {
+            const response = await fetch(`${EXPRESS_URL_NOTES}/${id}`)
+            if (response.status === 200) {
+                const fetchedNote = await response.json()
+                setNotes(notes.map(note => note.id !== id ? note : fetchedNote))
+            } else {
+                throw new Error(`${response.status}`)
+            }
+        } catch(error) {
+            console.error(`getNote thrown an error: ${error}`)
         }
     }
 
@@ -50,7 +64,7 @@ export default function useNotesService() {
         }
     }
 
-    const updateNote = async (id, changedNote) => {
+    const toggleImportant = async (id, changedNote) => {
         try {
             const response = await fetch(`${EXPRESS_URL_NOTES}/${id}`, fetchOptions("PATCH", changedNote))
             if (response.status === 200) {
@@ -79,6 +93,13 @@ export default function useNotesService() {
             }
             console.error(`updateNote thrown an error: ${error}`)
         }
+    }
+
+    const updateNote = async (id, changedNote) => {
+    //     try{
+    //     } catch(error) {
+    //         console.error(error)
+    //     }
     }
 
     const deleteNote = async (id) => {
@@ -110,5 +131,14 @@ export default function useNotesService() {
         }
     }
 
-    return  [ notes, getNotes, addNote, updateNote, deleteNote, errorMessage ]
+    return  [
+        notes,
+        getNotes,
+        getNote,
+        addNote,
+        toggleImportant,
+        updateNote,
+        deleteNote,
+        errorMessage
+    ]
 }

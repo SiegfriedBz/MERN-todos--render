@@ -15,7 +15,24 @@ notesController.get(EXPRESS_URL_NOTES, async (req, resp) => {
             resp.sendStatus(404)
         }
     } catch (error) {
-        console.error(`fetching notes thrown on error: ${error}`)
+        console.error(`fetching notes thrown an error: ${error}`)
+        resp.sendStatus(500)
+    }
+})
+
+// show
+notesController.get(`${EXPRESS_URL_NOTES}/:id`, async (req, resp) => {
+    try {
+        const { params: { id } } = req
+        const note = Note.findById(id)
+        if(note) {
+            resp.status(200).json(note)
+        } else {
+            // status resource not found
+            resp.sendStatus(404)
+        }
+    } catch(error) {
+        console.error(`show note thrown an error: ${error}`)
         resp.sendStatus(500)
     }
 })
@@ -23,7 +40,7 @@ notesController.get(EXPRESS_URL_NOTES, async (req, resp) => {
 // create
 notesController.post(EXPRESS_URL_NOTES, async (req, resp) => {
     try{
-        let { body: { note } } = req
+        const { body: { note } } = req
         const newNote = new Note(note)
         const savedNewNote = await newNote.save()
         if(savedNewNote) {
@@ -33,7 +50,7 @@ notesController.post(EXPRESS_URL_NOTES, async (req, resp) => {
             throw new Error('new note was not saved')
         }
     } catch(error) {
-        console.error(`create note thrown on error: ${error}`)
+        console.error(`create note thrown an error: ${error}`)
         resp.sendStatus(500)
     }
 })
@@ -55,7 +72,7 @@ notesController.patch(`${EXPRESS_URL_NOTES}/:id`, async (req, resp) => {
             resp.sendStatus(404)
         }
     } catch(error) {
-        console.error(`update note thrown on error: ${error}`)
+        console.error(`update note thrown an error: ${error}`)
         resp.sendStatus(500)
     }
 })
@@ -74,7 +91,7 @@ notesController.delete(`${EXPRESS_URL_NOTES}/:id`, async (req, resp) => {
             resp.sendStatus(404);
         }
     } catch(error) {
-        console.error(`delete note thrown on error: ${error}`)
+        console.error(`delete note thrown an error: ${error}`)
         resp.sendStatus(500)
     }
 })

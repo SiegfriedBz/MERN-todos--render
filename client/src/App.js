@@ -9,7 +9,15 @@ import AddNote from "./components/AddNote"
 import Login from './components/Login'
 
 function App() {
-    const [ notes, getNotes, addNote, updateNote, deleteNote, errorMessage] = useNotesService()
+    const [
+        notes,
+        getNotes,
+        getNote,
+        addNote,
+        updateNote,
+        deleteNote,
+        errorMessage
+    ] = useNotesService()
 
     const [showAllNotes, setShowAllNotes] = useState(true)
     const [user, setUser] = useState({
@@ -27,10 +35,14 @@ function App() {
         await addNote(note)
     }
 
-    const handleUpdate = async (id) => {
+    const handleUpdate = (id, changedNote={}) => {
+        let note = notes.find(n => n.id === id)
+    }
+
+    const handleToggleImportant = async (id) => {
         const note = notes.find(n => n.id === id)
         const changedNote = {...note, important: !note.important}
-        await updateNote(id, changedNote)
+        await toggleImportant(id, changedNote)
     }
 
     const handleDelete = async (id) => {

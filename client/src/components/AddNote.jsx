@@ -6,11 +6,9 @@ const AddNote = ({ handleAdd }) => {
     const [note, setNote] = useState(initNote);
 
     const handleChange = (e) => {
-        if(e.target.id === 'content') {
-            setNote({...note, content: e.target.value})
-        } else {
-            setNote({...note, important: !note.important})
-        }
+        const {name, value, type, checked} = e.target
+        console.log(name, value, type, checked)
+        setNote({...note, [name]: type !== 'checkbox' ? value : !checked})
     }
 
     const handleSubmit = (e) => {
@@ -31,7 +29,7 @@ const AddNote = ({ handleAdd }) => {
                     <input
                         type="text"
                         className="form-control w-25"
-                        id="content"
+                        name="content"
                         value={note.content}
                         onChange={handleChange}
                         placeholder="Enter content" />
@@ -40,7 +38,7 @@ const AddNote = ({ handleAdd }) => {
                     <input
                         type="checkbox"
                         className="form-check-input"
-                        id="important"
+                        namme="important"
                         checked={note.important}
                         onChange={handleChange}
                     />

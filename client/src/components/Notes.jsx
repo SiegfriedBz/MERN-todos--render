@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Note from './Note'
 import Button from './shared/Button'
 import clsx from 'clsx'

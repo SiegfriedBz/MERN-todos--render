@@ -10,6 +10,9 @@ const login = async (user) => {
             },
             body: JSON.stringify(user)
         })
+        if(response.status === 200) {
+
+        }
         // console.log(response.status)
         console.log('------')
         console.log(response)
