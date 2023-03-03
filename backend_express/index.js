@@ -1,5 +1,9 @@
-const { app, EXPRESS_URL_NOTES, EXPRESS_URL_LOGIN } = require('./express')
-const { User, Note, mongoDisconnect } = require('./mongo_db/models')
+const { app, EXPRESS_URL_NOTES, EXPRESS_URL_LOGIN } = require('./express/app')
+const {
+    Note,
+    User,
+    mongoDisconnect
+} = require('./database/index')
 
 // * LOGIN
 // app.post(EXPRESS_URL_LOGIN, (req, resp) => {
