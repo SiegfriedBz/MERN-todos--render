@@ -17,7 +17,7 @@ root folder : run `npm run build` => create React build and move it to backend f
 
 Note : only the `backend_express` directory (`React build` + `Express server` + `mongo db logic`) is deployed to the `render.com` cloud service
 
-https://mono-express-react-notes.onrender.com/
+https://mern-notes-vitc.onrender.com/
 
 ----
 # local
