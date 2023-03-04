@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose')
-const Note = require('./models/noteModel')
+const Todo = require('./models/todoModel')
 const User = require('./models/userModel')
 const MONGO_URL = process.env.MONGO_URL
 
@@ -19,7 +19,7 @@ const mongoDisconnect = () => {
 }
 
 module.exports = {
-    Note,
+    Todo,
     User,
     mongoDisconnect
 }

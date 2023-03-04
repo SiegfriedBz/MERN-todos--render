@@ -1,0 +1,146 @@
+#form-add-todo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .input-content {
+    background-color: $green;
+    color: $white;
+    font-size: 24px;
+    font-weight: bolder;
+    padding: 4px 8px;
+    margin: 0 8px 0 0;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+
+    &::placeholder {
+      color: inherit;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .input-important {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: $white;
+    border: none;
+    cursor: pointer;
+
+    &:checked {
+      background-color: $orange;
+    }
+  }
+
+  .input-checkbox-label {
+    font-size: 16px;
+    font-weight: bolder;
+    margin: 0 8px;
+
+    &.is-checked {
+      color: $yellow;
+    }
+
+    &.is-not-checked {
+      color: $white;
+    }
+  }
+}
+
+.update-todo-container {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+
+  span i {
+    margin: 0 0 0 16px;
+    font-size: 18px;
+    font-weight: bolder;
+  }
+
+  .update-todo-form {
+    color: $white;
+    background-color: $blue-electric;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+
+    input.content {
+      color: inherit;
+      background-color: inherit;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bolder;
+      padding: 4px 8px;
+      border: none;
+      outline: none;
+    }
+
+    span.important {
+      i.icon-important-yellow {
+        color: $yellow;
+      }
+    }
+  }
+
+  span.update {
+    i.icon-update-green {
+      color: $green;
+    }
+
+    .icon-rotate {
+      @extend .icon-update-green;
+      animation: spin 2s linear infinite;
+
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+
+  span.delete {
+    i.icon-delete-yellow{
+      color: $yellow;
+    }
+  }
+}
+
+#toggle-show-all-todos {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+
+  button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+
+    &:has(i.fa-toggle-off) {
+      color: $white;
+    }
+    &:has(i.fa-toggle-on) {
+      color: $yellow;
+    }
+  }
+
+  span {
+    font-weight: bolder;
+    &.toggle-off {
+      color: $white;
+    }
+    &.toggle-on {
+      color: $yellow;
+    }
+  }
+}

@@ -1,74 +1,73 @@
 import { useState, useEffect } from 'react'
-import useNotesService from './services/useNotesService'
+import useTodoService from './services/useTodoService'
 import login from './services/loginService'
-import Notification from './components/shared/Notification'
+// import Notification from './components/shared/Notification'
 import Navbar from './components/shared/Navbar'
 import Footer from './components/shared/Footer'
-import Notes from './components/Notes'
-import AddNote from "./components/AddNote"
-import Login from './components/Login'
+import Todos from './components/Todos'
+import AddTodo from "./components/AddTodo"
+// import Login from './components/Login'
 
 function App() {
     const [
-        notes,
-        getNotes,
-        getNote,
-        addNote,
-        updateNote,
-        deleteNote,
+        todos,
+        getTodos,
+        addTodo,
+        updateTodo,
+        deleteTodo,
         errorMessage
-    ] = useNotesService()
+    ] = useTodoService()
 
-    const [showAllNotes, setShowAllNotes] = useState(true)
+    const [showAllTodos, setShowAllTodos] = useState(true)
     const [user, setUser] = useState({
         username: '',
         password: ''
     })
 
+
     useEffect(() => {
         (async () => {
-            await getNotes()
+            await getTodos()
         })()
     }, [])
 
-    const handleAdd = async(note) => {
-        await addNote(note)
+    const handleAdd = async(todo) => {
+        await addTodo(todo)
     }
 
-    const handleUpdate = async (id, changedNote) => {
-        await updateNote(id, changedNote)
+    const handleUpdate = async (id, changedTodo) => {
+        await updateTodo(id, changedTodo)
     }
 
     const handleDelete = async (id) => {
-        await deleteNote(id)
+        await deleteTodo(id)
     }
 
     const handleLogin = async (e) => {
-        e.preventDefault()
-        await login(user)
-        console.log('logging in with', user.username, user.password)
+        // e.preventDefault()
+        // await login(user)
     }
 
-    const notesToShow = showAllNotes ? notes : notes.filter(n => n.important)
+    const todosToShow = showAllTodos ? todos : todos.filter(t => t.important)
 
     return (
         <>
             <Navbar />
-            <div className="container">
-                <Notification message={errorMessage}/>
-                <Login
-                    handleLogin={handleLogin}
-                    user={user}
-                    setUser={setUser}
-                />
-                <Notes
-                    notesToShow={notesToShow}
-                    showAllNotes={showAllNotes}
-                    setShowAllNotes={setShowAllNotes}
+            <div className="App">
+                {/*<Notification message={errorMessage}/>*/}
+                {/*<Login*/}
+                {/*    handleLogin={handleLogin}*/}
+                {/*    user={user}*/}
+                {/*    setUser={setUser}*/}
+                {/*/>*/}
+                <AddTodo handleAdd={handleAdd} />
+                <Todos
+                    todosToShow={todosToShow}
+                    showAllTodos={showAllTodos}
+                    setShowAllTodos={setShowAllTodos}
                     handleUpdate={handleUpdate}
                     handleDelete={handleDelete}
                 />
-                <AddNote handleAdd={handleAdd} />
             </div>
             <Footer />
         </>

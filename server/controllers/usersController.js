@@ -1,9 +1,9 @@
 const express = require('express')
 const usersController = express.Router()
 const { User } = require('../database/index')
-const { EXPRESS_URL_LOGIN } = require('./constants')
+const { LOGIN_ENDPOINT } = require('./constants')
 
-// usersController.post(EXPRESS_URL_LOGIN, (req, resp) => {
+// usersController.post(LOGIN_ENDPOINT, (req, resp) => {
 //     const { body: user } = req
 //     console.log('user', user)
 //     const newUser = new User(user)

@@ -1,4 +1,4 @@
 module.exports = {
-    EXPRESS_URL_NOTES: '/notes',
-    EXPRESS_URL_LOGIN: '/login'
+    TODOS_ENDPOINT: '/todos',
+    LOGIN_ENDPOINT: '/login'
 }

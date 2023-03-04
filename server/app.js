@@ -1,7 +1,7 @@
 const express = require('express')
+const { todosController, usersController } = require('./controllers/index')
 const cors = require('cors')
 const { mongoDisconnect } = require('./database/index')
-const { notesController, usersController } = require('./controllers/index')
 
 const app = express()
 app.use(express.json())
@@ -10,8 +10,8 @@ app.use(express.json())
 app.use(cors())
 app.use(express.static('client_build'))
 
-app.use('/api/notes', notesController)
-app.use('/api/login', usersController)
+app.use(`/api`, todosController)
+// app.use('/api', usersController)
 
 const PORT = process.env.PORT || 3001
 const server = app.listen(PORT, () => {
@@ -20,7 +20,7 @@ const server = app.listen(PORT, () => {
 
 process.on('SIGTERM', () => {
     server.close(() => {
-        mongoDisconnect() // close MongoDB connection
+        mongoDisconnect()
         console.log('Process terminated. MongoDB connection closed.')
     })
 })

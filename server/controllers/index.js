@@ -1,7 +1,7 @@
-const { notesController } = require('./notesController')
+const { todosController } = require('./todosController')
 const { usersController } = require('./usersController')
 
 module.exports = {
-    notesController,
+    todosController,
     usersController
 }

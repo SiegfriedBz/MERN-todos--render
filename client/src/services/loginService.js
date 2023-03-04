@@ -1,9 +1,9 @@
-import { EXPRESS_URL_LOGIN } from './expressUrl'
+import { LOGIN_ENDPOINT } from './constants'
 
 const login = async (user) => {
     try {
         console.log('login...')
-        const response = await fetch(EXPRESS_URL_LOGIN, {
+        const response = await fetch(LOGIN_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,11 +1,11 @@
-const { Schema } = require('mongoose')
+const mongoose = require('mongoose')
 
-const noteSchema = new Schema({
+const todoSchema = new mongoose.Schema({
     content: String,
     important: Boolean
 })
 
-noteSchema.set('toJSON', {
+todoSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id
@@ -13,4 +13,4 @@ noteSchema.set('toJSON', {
     }
 })
 
-module.exports =  noteSchema
+module.exports =  todoSchema

@@ -1,5 +1,5 @@
 .footer {
-  background-color: $footer-bg;
+  background-color: $green;
   width: 100%;
   height: 1.75*$spacer;
   position: absolute;
@@ -17,12 +17,12 @@
       list-style: none;
       margin-left: 1rem;
       a {
-        color: $blue-react;
+        color: $orange-red;
         text-decoration: none;
         i {
           font-size: 1.75rem;
           &:hover {
-            color: $blue-light;
+            color: $orange;
           }
         }
       }
@@ -30,7 +30,7 @@
   }
 
   span {
-    color: $blue-react;
+    color: $orange-red;
     font-weight: bolder;
     font-style: italic;
   }
