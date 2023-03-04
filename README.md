@@ -1,4 +1,4 @@
-# MERN todos app 
+# MERN todos App 
 
 root folder : run `npm run build` => create React build and move it to backend folder
 
