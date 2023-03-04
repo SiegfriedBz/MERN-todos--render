@@ -1,1 +1,1 @@
-- React front end used to generate the build in backend_express directory
+- React front end used to generate the build in server directory

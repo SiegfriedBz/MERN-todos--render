@@ -2,4 +2,6 @@
 - contains:
   + React build
   + Express server
+  + Mongoose
+
 
