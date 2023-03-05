@@ -31,7 +31,7 @@ const AddTodo = ({ handleAdd }) => {
     })
 
     return (
-        <form
+        <div
             className='todo-wrapper'
             onSubmit={handleSubmit}
         >
@@ -51,13 +51,12 @@ const AddTodo = ({ handleAdd }) => {
                 </span>
             </div>
                 <Button
-                    id='btn-save'
-                    className='button'
+                    className='btn-save'
                     type="submit"
                 >
                     <i className="fa-solid fa-cloud-arrow-up"></i>
                 </Button>
-        </form>
+        </div>
     )
 }
 

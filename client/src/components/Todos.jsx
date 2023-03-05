@@ -15,7 +15,7 @@ const Todos = ({
         "fa-toggle-on": !showAllTodos
     })
 
-    const spanClass = clsx('ms-1',{
+    const spanClass = clsx({
         "toggle-off": showAllTodos,
         "toggle-on": !showAllTodos
     })
@@ -24,6 +24,7 @@ const Todos = ({
         <>
             <div id='toggle-show-all-todos'>
                 <Button
+                    className='btn-toggle-show'
                     onClick={() => setShowAllTodos(prev => !prev)}
                 >
                     <i className={iconClass}>< /i>

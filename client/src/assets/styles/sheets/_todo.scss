@@ -19,11 +19,13 @@
 
     &.add-todo {
       font-size: 24px;
-      background-color: $green;
+      //background-color: $green;
+      background-image: linear-gradient(to right, $green-light, $green);
   }
     &.update-todo {
-      font-size: 18px;
-      background-color: $blue-electric;
+      font-size: 24px;
+      //background-color: $blue-electric;
+      background-image: linear-gradient(to right, $blue-electric-light, $blue-electric);
     }
 
     @include media-breakpoint-up(sm) {
@@ -75,7 +77,7 @@
     }
   }
 
-  button#btn-save {
+  button.btn-save {
     i {
       font-size: 32px;
     }
@@ -92,7 +94,12 @@
       cursor: pointer;
 
       &.update {
-        color: $green;
+        color: $green-light;
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+          color: $green;
+        }
 
         .rotate {
           @extend i;
@@ -107,7 +114,19 @@
       }
 
       &.delete {
-        color: $yellow;
+        color: $yellow-flash;
+        transition: color 0.2s ease-in-out;
+        &:hover {
+          color: $orange;
+        }
+
+        @include media-breakpoint-up(sm) {
+          color: $orange;
+          transition: color 0.2s ease-in-out;
+          &:hover {
+            color: $orange-red;
+          }
+        }
       }
     }
   }
@@ -118,28 +137,65 @@
   display: flex;
   align-items: center;
   margin: 16px 0;
+  color: $white;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $yellow;
+  }
 
   span {
     font-weight: bolder;
     &.toggle-off {
-      color: $white;
+      color: inherit;
+      &:hover {
+        color: $yellow;
+      }
     }
     &.toggle-on {
       color: $yellow;
     }
   }
 
-  button {
+  .btn-toggle-show {
     border: none;
+    margin: 0;
+    padding: 0;
     background-color: transparent;
     display: flex;
     align-items: center;
 
     &:has(i.fa-toggle-off) {
-      color: $white;
+      color: inherit;
     }
+
     &:has(i.fa-toggle-on) {
       color: $yellow;
     }
+
+    i { margin: 0;}
+    span { margin: 0 0 0 8px;}
+  }
+}
+
+
+.btn-save {
+  margin: 8px 0;
+  padding: 0;
+  font-weight: bolder;
+  border: none;
+  color: $white;
+  background-color: transparent;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $green;
+  }
+
+  @include media-breakpoint-up(sm) {
+    margin: 0 0 0 8px ;
+    padding: 0;
+    display: flex;
+    align-items: center;
   }
 }
