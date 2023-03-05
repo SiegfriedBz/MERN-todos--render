@@ -37,7 +37,7 @@ const AddTodo = ({ handleAdd }) => {
         >
             <div className='input-wrapper add-todo'>
                 <input
-                    class='input-content'
+                    className='input-content'
                     type="text"
                     name="content"
                     value={todo.content}
