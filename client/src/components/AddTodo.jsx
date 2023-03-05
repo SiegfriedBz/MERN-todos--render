@@ -5,12 +5,15 @@ import Button from './shared/Button'
 const AddTodo = ({ handleAdd }) => {
     const initTodo = { content: "", important: false }
     const [todo, setTodo] = useState(initTodo);
-    const [inputIsChecked, setInputIsChecked] = useState(false)
 
     const handleChange = (e) => {
-        const { name, type, value, checked } = e.target
-        setInputIsChecked(checked)
-        setTodo({...todo, [name]: type === 'text' ? value : !todo.important})
+        const { name, value } = e.target
+        setTodo({...todo, [name]: value })
+    }
+
+    const handleChangeImportant = () => {
+        const newVal = !todo.important
+        setTodo({...todo, important: newVal })
     }
 
     const handleSubmit = (e) => {
@@ -23,39 +26,37 @@ const AddTodo = ({ handleAdd }) => {
         }
     }
 
-    const checkboxLabelClass = clsx('input-checkbox-label', {
-        'is-checked': inputIsChecked,
-        'is-not-checked': !inputIsChecked
+    const spanImportantClass = clsx('input-important', {
+        'important': todo.important
     })
 
     return (
         <form
-            id='form-add-todo'
-            onSubmit={handleSubmit}>
+            className='todo-wrapper'
+            onSubmit={handleSubmit}
+        >
+            <div className='input-wrapper add-todo'>
                 <input
-                    className='input-content'
+                    class='input-content'
                     type="text"
                     name="content"
                     value={todo.content}
                     onChange={handleChange}
                     placeholder="Enter todo..." />
-                <input
-                    className='input-important'
-                    type="checkbox"
-                    name="important"
-                    checked={todo.important}
-                    onChange={handleChange}
-                />
-                <label
-                    className={checkboxLabelClass}
-                    htmlFor="important"
+                <span
+                    className={spanImportantClass}
+                    onClick={handleChangeImportant}
                 >
-                    Important
-                </label>
-            <Button
-                className='button'
-                type="submit"
-            >Add</Button>
+                    <i className='fa-solid fa-circle-exclamation'></i>
+                </span>
+            </div>
+                <Button
+                    id='btn-save'
+                    className='button'
+                    type="submit"
+                >
+                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                </Button>
         </form>
     )
 }

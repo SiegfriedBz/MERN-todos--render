@@ -3,22 +3,9 @@ import clsx from 'clsx';
 
 const Todo = ({todo, handleUpdate, handleDelete}) => {
     const [changedTodo, setChangedTodo] = useState(todo)
-    const [iconUpdateRotate, setIconUpdateRotate] = useState(false)
+    const [iconRotate, setIconRotate] = useState(false)
 
-    const iconIsImportantClass = clsx('fa-solid fa-circle-exclamation', {
-        'icon-important-yellow': changedTodo.important
-    })
-
-    const iconUpdateClass = clsx('fa-solid fa-arrows-rotate', {
-        'icon-update-green': true,
-        'icon-rotate': iconUpdateRotate
-    })
-
-    const iconDeleteClass = clsx('fa-solid fa-trash-can', {
-        'icon-delete-yellow': true
-    })
-
-    const toggleImportant = () => {
+    const handleChangeImportant = () => {
         setChangedTodo({...changedTodo,
             important: !changedTodo.important
         })
@@ -31,43 +18,50 @@ const Todo = ({todo, handleUpdate, handleDelete}) => {
     }
 
     const handleSubmit = async (e) => {
-        console.log('in handleSubmit')
         e.preventDefault()
-        setIconUpdateRotate(true)
+        setIconRotate(true)
         await handleUpdate(todo.id, changedTodo)
-        setIconUpdateRotate(false)
+        setIconRotate(false)
     }
 
+    const spanImportantClass = clsx('input-important', {
+        'important': changedTodo.important
+    })
+
+    const iconUpdateClass = clsx('fa-solid fa-arrows-rotate', {
+        'rotate': iconRotate
+    })
+
     return (
-        <li>
-            <div className="update-todo-container"
+            <div className="todo-wrapper update-todo"
             >
-                <div className='update-todo-form'>
+                <div className='input-wrapper update-todo'>
                     <input
-                        className='content'
+                        className='input-content'
                         value={changedTodo.content}
                         onChange={handleChange}
                     />
                     <span
-                        className='important'
-                        onClick={toggleImportant}
+                        className={spanImportantClass}
+                        onClick={handleChangeImportant}
                     >
-                        <i className={iconIsImportantClass}></i>
+                        <i className='fa-solid fa-circle-exclamation'></i>
                     </span>
                 </div>
-                <span
-                    className='update'
-                    onClick={handleSubmit}
-                >
-                    <i className={iconUpdateClass}></i>
-                </span>
-                <span className='delete'
-                    onClick={() => handleDelete(changedTodo.id)}
-                >
-                    <i className={iconDeleteClass}></i>
-                </span>
+                <div className='btn-wrapper'>
+                    <span
+                        className='update'
+                        onClick={handleSubmit}
+                    >
+                        <i className={iconUpdateClass}></i>
+                    </span>
+                    <span className='delete'
+                          onClick={() => handleDelete(changedTodo.id)}
+                    >
+                        <i className='fa-solid fa-trash-can'></i>
+                    </span>
+                </div>
             </div>
-        </li>
     )
 }
 

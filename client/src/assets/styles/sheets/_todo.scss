@@ -1,124 +1,133 @@
-#form-add-todo {
+// AddTodo, Todo components
+.todo-wrapper {
   display: flex;
-  align-items: center;
-  margin-bottom: 16px;
+  flex-direction: column;
 
-  .input-content {
-    background-color: $green;
-    color: $white;
-    font-size: 24px;
-    font-weight: bolder;
-    padding: 4px 8px;
-    margin: 0 8px 0 0;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-
-    &::placeholder {
-      color: inherit;
-    }
-
-    &:focus {
-      outline: none;
-    }
+  @include media-breakpoint-up(sm) {
+    flex-direction: row;
+    align-items: center;
   }
 
-  .input-important {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 20px;
-    height: 20px;
-    background-color: $white;
-    border: none;
-    cursor: pointer;
-
-    &:checked {
-      background-color: $orange;
-    }
+  &.update-todo {
+    margin-bottom: 8px;
   }
 
-  .input-checkbox-label {
-    font-size: 16px;
-    font-weight: bolder;
-    margin: 0 8px;
-
-    &.is-checked {
-      color: $yellow;
-    }
-
-    &.is-not-checked {
-      color: $white;
-    }
-  }
-}
-
-.update-todo-container {
-  display: flex;
-  align-items: center;
-  margin: 8px 0;
-
-  span i {
-    margin: 0 0 0 16px;
-    font-size: 18px;
-    font-weight: bolder;
-  }
-
-  .update-todo-form {
-    color: $white;
-    background-color: $blue-electric;
+  .input-wrapper {
     border-radius: 8px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
+    flex-direction: column;
 
-    input.content {
-      color: inherit;
-      background-color: inherit;
-      border-radius: 8px;
+    &.add-todo {
+      font-size: 24px;
+      background-color: $green;
+  }
+    &.update-todo {
       font-size: 18px;
+      background-color: $blue-electric;
+    }
+
+    @include media-breakpoint-up(sm) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    input.input-content {
+      font-size: inherit;
+      background-color: inherit;
+      color: $white;
       font-weight: bolder;
       padding: 4px 8px;
+      margin: 0;
+      border-radius: 8px;
       border: none;
-      outline: none;
-    }
+      cursor: pointer;
 
-    span.important {
-      i.icon-important-yellow {
-        color: $yellow;
+      &::placeholder {
+        color: inherit;
+      }
+
+      &:focus {
+        outline: none;
       }
     }
-  }
 
-  span.update {
-    i.icon-update-green {
-      color: $green;
-    }
+    span.input-important {
+      margin: 0 8px;
+      color: $white;
+      transition: color 0.2s ease-in-out;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
 
-    .icon-rotate {
-      @extend .icon-update-green;
-      animation: spin 2s linear infinite;
+      &.important {
+        color: $orange;
+      }
 
-      @keyframes spin {
-        100% {
-          transform: rotate(360deg);
+      i {
+        font-size: 24px;
+        margin: 0 0 8px 0;
+
+        @include media-breakpoint-up(sm) {
+          margin: 0;
         }
       }
     }
   }
 
-  span.delete {
-    i.icon-delete-yellow{
-      color: $yellow;
+  button#btn-save {
+    i {
+      font-size: 32px;
+    }
+  }
+
+  .btn-wrapper {
+    @include media-breakpoint-up(sm) {
+      margin: 0 8px;
+    }
+
+    span {
+      font-size: 24px;
+      margin: 0 8px;
+      cursor: pointer;
+
+      &.update {
+        color: $green;
+
+        .rotate {
+          @extend i;
+          animation: spin 2s linear infinite;
+
+          @keyframes spin {
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        }
+      }
+
+      &.delete {
+        color: $yellow;
+      }
     }
   }
 }
 
+// Todos component
 #toggle-show-all-todos {
   display: flex;
   align-items: center;
   margin: 16px 0;
+
+  span {
+    font-weight: bolder;
+    &.toggle-off {
+      color: $white;
+    }
+    &.toggle-on {
+      color: $yellow;
+    }
+  }
 
   button {
     border: none;
@@ -130,16 +139,6 @@
       color: $white;
     }
     &:has(i.fa-toggle-on) {
-      color: $yellow;
-    }
-  }
-
-  span {
-    font-weight: bolder;
-    &.toggle-off {
-      color: $white;
-    }
-    &.toggle-on {
       color: $yellow;
     }
   }

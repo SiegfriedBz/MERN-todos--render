@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link, Route, Routes } from 'react-router-dom';
 import useTodoService from './services/useTodoService'
 import login from './services/loginService'
 // import Notification from './components/shared/Notification'
@@ -6,6 +7,7 @@ import Navbar from './components/shared/Navbar'
 import Footer from './components/shared/Footer'
 import Todos from './components/Todos'
 import AddTodo from "./components/AddTodo"
+import About from './components/About'
 // import Login from './components/Login'
 
 function App() {
@@ -60,14 +62,25 @@ function App() {
                 {/*    user={user}*/}
                 {/*    setUser={setUser}*/}
                 {/*/>*/}
-                <AddTodo handleAdd={handleAdd} />
-                <Todos
-                    todosToShow={todosToShow}
-                    showAllTodos={showAllTodos}
-                    setShowAllTodos={setShowAllTodos}
-                    handleUpdate={handleUpdate}
-                    handleDelete={handleDelete}
-                />
+                <Routes>
+                    <Route path='/' element={
+                        <>
+                            <AddTodo handleAdd={handleAdd}/>
+                            <Todos
+                                todosToShow={todosToShow}
+                                showAllTodos={showAllTodos}
+                                setShowAllTodos={setShowAllTodos}
+                                handleUpdate={handleUpdate}
+                                handleDelete={handleDelete}
+                            />
+                        </>
+                    }
+                    />
+                    <Route path='/about' element={
+                        <About />
+                    }>
+                    </Route>
+                </Routes>
             </div>
             <Footer />
         </>
