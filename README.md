@@ -36,6 +36,6 @@ https://mern-todo-app-pjhm.onrender.com/
   
   ----
   
-![image](https://user-images.githubusercontent.com/99029880/222922380-7a4a6e1e-fed7-4f50-ac14-1795161be7cd.png)
+<img width="588" alt="image" src="https://user-images.githubusercontent.com/99029880/222968925-ac9746c8-995f-4b79-8565-935cc91b0cd5.png">
 
 
